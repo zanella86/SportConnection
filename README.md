@@ -47,3 +47,4 @@ https://github.com/zanella86/sc-core-api
 - [Flutter - Best Practices - Part 2](https://itnext.io/flutter-best-practices-part-2-e9e5c79ccb16)
 - [Flutter - Best Practices - Part 3](https://itnext.io/flutter-best-practices-part-3-747f1bfaec6b)
 - [Flutter - Best Practices - Part 4](https://itnext.io/flutter-best-practices-part-4-709e7bceabf)
+- [Alura - Diferenças: static, const e final](https://www.alura.com.br/artigos/diferenca-entre-static-const-final-no-dart)
