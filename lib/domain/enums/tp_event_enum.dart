@@ -1,0 +1,1 @@
+enum TpEventEnum { RANKED, LEARN, FUN }
