@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sport_connection/bloc/events/events_cubit.dart';
-import 'package:sport_connection/bloc/profile/profile_cubit.dart';
+import 'package:sport_connection/presentation/blocs/events/events_cubit.dart';
+import 'package:sport_connection/presentation/blocs/profile/profile_cubit.dart';
 import 'package:sport_connection/ui/auth/auth_screen.dart';
 import 'package:sport_connection/ui/auth/register/register_screen.dart';
 import 'package:sport_connection/ui/home/home_container.dart';

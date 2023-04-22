@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_connection/domain/entities/profile_entity.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
-import 'package:sport_connection/ui/widgets/bottom_bar.dart';
+import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String id = '/profile_screen';

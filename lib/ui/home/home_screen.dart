@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sport_connection/domain/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/tp_event_enum.dart';
 import 'package:sport_connection/ui/profile/profile_screen.dart';
-import 'package:sport_connection/ui/widgets/bottom_bar.dart';
+import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = '/home_screen';

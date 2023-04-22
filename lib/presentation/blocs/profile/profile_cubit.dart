@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport_connection/bloc/profile/profile_cubit_state.dart';
 import 'package:sport_connection/data/usecases/remote_fetch_profile.dart';
 import 'package:sport_connection/domain/usecases/fetch_profile.dart';
+import 'package:sport_connection/presentation/blocs/profile/profile_cubit_state.dart';
 
 class ProfileCubit extends Cubit<ProfileCubitState> {
   ProfileCubit(

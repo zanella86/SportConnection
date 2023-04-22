@@ -25,7 +25,7 @@ class RemoteFetchProfile extends FetchProfile {
         name: "Lais Kagawa",
         userName: "laisKagawa",
         eventsScore: 99,
-        score: 92,
+        score: 10,
         address: "R. XPTIO 157",
         achievements: achievements,
         profileImage: 'https://w0.peakpx.com/wallpaper/609/744/HD-wallpaper-kakashi-naruto-kakashi-dms-kakashi-naruto-naruto-kakashi-hatake-kakashi-kakashi-uchiha-kakashi-hatake-naruto-shippuden-kakashi-sharingan.jpg'
