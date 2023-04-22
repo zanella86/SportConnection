@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sport_connection/bloc/events/events_cubit.dart';
+import 'package:sport_connection/bloc/profile/profile_cubit.dart';
 import 'package:sport_connection/ui/auth/auth_screen.dart';
 import 'package:sport_connection/ui/auth/register/register_screen.dart';
 import 'package:sport_connection/ui/home/home_container.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
 import 'package:sport_connection/ui/auth/login/login_screen.dart';
+import 'package:sport_connection/ui/profile/profile_container.dart';
+import 'package:sport_connection/ui/profile/profile_screen.dart';
 import 'package:sport_connection/ui/splash_screen.dart';
 
 void main() {
@@ -30,6 +33,9 @@ class MyApp extends StatelessWidget {
         HomeScreen.id: (context) => EventCubitProvider(
           child: HomeContainer(),
         ),
+        ProfileScreen.id: (context) => ProfileCubitProvider(
+          child: ProfileContainer(),
+        )
       }
     );
   }

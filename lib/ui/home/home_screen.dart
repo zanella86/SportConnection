@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sport_connection/domain/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/tp_event_enum.dart';
-import 'package:sport_connection/presentation/widgets/rounded_button.dart';
+import 'package:sport_connection/ui/profile/profile_screen.dart';
+import 'package:sport_connection/ui/widgets/bottom_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = '/home_screen';
@@ -96,28 +97,19 @@ class HomeScreen extends StatelessWidget {
         onPressed: null,
         child: const Icon(Icons.home),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).colorScheme.primary,
-        shape: const CircularNotchedRectangle(),
-        child: IconTheme(
-          data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.gpp_good)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.calendar_today)),
-                SizedBox(
-                  width: 24,
-                ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.person))
-              ],
-            ),
-          ),
+      bottomNavigationBar: BottomBar(items: [
+        IconButton(onPressed: () {}, icon: const Icon(Icons.gpp_good)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.calendar_today)),
+        const SizedBox(
+          width: 24,
         ),
-      ),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+        IconButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, ProfileScreen.id);
+            },
+            icon: const Icon(Icons.person))
+      ],)
     );
   }
 }
