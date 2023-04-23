@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sport_connection/ui/profile/profile_screen.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({Key? key, required this.items }) : super(key: key);

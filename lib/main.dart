@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sport_connection/bloc/events/events_cubit.dart';
-import 'package:sport_connection/bloc/profile/profile_cubit.dart';
+import 'package:sport_connection/presentation/blocs/events/events_cubit.dart';
+import 'package:sport_connection/presentation/blocs/profile/profile_cubit.dart';
+import 'package:sport_connection/presentation/blocs/user/user_cubit.dart';
 import 'package:sport_connection/ui/auth/auth_screen.dart';
+import 'package:sport_connection/ui/auth/register/register_container.dart';
 import 'package:sport_connection/ui/auth/register/register_screen.dart';
 import 'package:sport_connection/ui/home/home_container.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
@@ -20,24 +22,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SportConnection',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
-      initialRoute: SplashScreen.id,
-      routes: {
-        SplashScreen.id: (context) => const SplashScreen(),
-        AuthScreen.id: (context) => const AuthScreen(),
-        RegisterScreen.id: (context) => RegisterScreen(),
-        LoginScreen.id: (context) => LoginScreen(),
-        HomeScreen.id: (context) => EventCubitProvider(
-          child: HomeContainer(),
+        title: 'SportConnection',
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
         ),
-        ProfileScreen.id: (context) => ProfileCubitProvider(
-          child: ProfileContainer(),
-        )
-      }
-    );
+        initialRoute: SplashScreen.id,
+        routes: {
+          SplashScreen.id: (context) => const SplashScreen(),
+          AuthScreen.id: (context) => const AuthScreen(),
+          RegisterScreen.id: (context) => UserCubitProvider(
+                child: RegisterContainer(),
+              ),
+          LoginScreen.id: (context) => LoginScreen(),
+          HomeScreen.id: (context) => EventCubitProvider(
+                child: HomeContainer(),
+              ),
+          ProfileScreen.id: (context) => ProfileCubitProvider(
+                child: ProfileContainer(),
+              )
+        });
   }
-
 }

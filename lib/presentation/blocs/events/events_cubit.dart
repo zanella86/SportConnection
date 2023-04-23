@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport_connection/bloc/events/events_cubit_state.dart';
 import 'package:sport_connection/data/usecases/remote_fetch_events.dart';
 import 'package:sport_connection/domain/usecases/fetch_events.dart';
+import 'package:sport_connection/presentation/blocs/events/events_cubit_state.dart';
 
 class EventsCubit extends Cubit<EventsCubitState> {
   EventsCubit(
