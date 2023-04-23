@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     _controller.forward();
     return Scaffold(
-      backgroundColor: Color.fromRGBO(76, 82, 112, 1),
+      backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
         child: FadeTransition(
           opacity: _animation,
@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
                 Text(
                   'SPORT CONNECTION',
                   style: TextStyle(
-                      color: Color.fromRGBO(246, 82, 160, 1),
+                      color: Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
