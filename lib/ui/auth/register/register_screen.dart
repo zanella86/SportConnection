@@ -135,7 +135,7 @@ class RegisterScreen extends StatelessWidget {
         context.read<UserCubit>().post(inputtedUser, inputtedPassword);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('A senha esta diferente da confirmação')));
+            const SnackBar(content: Text('A senha esta diferente da confirmação')));
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
