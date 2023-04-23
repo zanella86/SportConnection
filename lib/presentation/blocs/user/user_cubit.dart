@@ -14,10 +14,15 @@ class UserCubit extends Cubit<UserCubitState> {
   PostUser postUser;
 
   Future<void> post(username, password) async {
+    emit(state.copyWith(isLoading: true));
+    
     final userDto = await postUser.execute(username: username, password: password);
 
-    print('ant emit ${userDto.id}');
-    emit(state.copyWith(userDTO: userDto));
+    if(userDto != null && userDto.id != 0) {
+      emit(state.copyWith(userDTO: userDto, isLoading: false, isSuccess: true));
+    } else {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 }
 

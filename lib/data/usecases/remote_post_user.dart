@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:http/http.dart';
 import 'package:sport_connection/domain/models/user_dto_model.dart';
 import 'package:sport_connection/domain/usecases/post_user.dart';
 
