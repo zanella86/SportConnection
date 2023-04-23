@@ -10,8 +10,8 @@ class UserUseCase implements UserUseCaseType {
   final UserRepositoryType userRepositoryType;
 
   @override
-  Future<UserModel> getUserModel() async {
-    final userEntity = await userRepositoryType.getUserEntity();
+  Future<UserModel> getUserModel(int id) async {
+    final userEntity = await userRepositoryType.getUserEntity(id);
     return UserTranslator.toModel(userEntity: userEntity);
   }
 

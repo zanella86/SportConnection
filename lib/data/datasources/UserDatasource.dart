@@ -9,8 +9,9 @@ class UserDatasource implements UserDatasourceType {
   final APIBasicAuthType apiBasicAuthType;
 
   @override
-  Future<UserEntity> getUserEntity() async {
-    return await apiBasicAuthType.getUser();  // FIXME: Não deveria ser o Model aqui?
+  Future<UserEntity> getUserEntity(int id) async {
+    //return await apiBasicAuthType.;
+    throw UnimplementedError();
   }
 
   @override

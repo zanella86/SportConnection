@@ -35,32 +35,33 @@ class RegisterScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Center(
-              child:
-              Column(mainAxisSize: MainAxisSize.min, children: [
-                RoundedTextField(
-                  label: 'Insira seu usuário',
-                  textInputType: TextInputType.name,
-                  onTextChange: (text) => inputtedUser = text,
-                ),
-                const SizedBox(height: 16),
-                RoundedTextField(
-                  label: 'Senha',
-                  obscureText: true,
-                  onTextChange: (text) => inputtedPassword = text,
-                ),
-                const SizedBox(height: 16),
-                RoundedTextField(
-                  label: 'Confirmação de senha',
-                  obscureText: true,
-                  onTextChange: (text) =>
-                  inputtedConfirmPassword = text,
-                ),
-                const SizedBox(height: 64),
-                RoundedButton(
-                  text: 'Registrar',
-                  onPressed: () => validateRegister(context),
-                )
-              ]),
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    RoundedTextField(
+                      label: 'Insira seu usuário',
+                      textInputType: TextInputType.name,
+                      onTextChange: (text) => inputtedUser = text,
+                    ),
+                    const SizedBox(height: 16),
+                    RoundedTextField(
+                      label: 'Senha',
+                      obscureText: true,
+                      onTextChange: (text) => inputtedPassword = text,
+                    ),
+                    const SizedBox(height: 16),
+                    RoundedTextField(
+                      label: 'Confirmação de senha',
+                      obscureText: true,
+                      onTextChange: (text) => inputtedConfirmPassword = text,
+                    ),
+                    const SizedBox(height: 64),
+                    RoundedButton(
+                      text: 'Registrar',
+                      onPressed: () => _validateRegister(context),
+                    )
+                  ]
+              ),
             ),
           )),
     );
@@ -122,20 +123,23 @@ class RegisterScreen extends StatelessWidget {
     );*/
   }
 
-  bool comparePasswords() {
+  bool _comparePasswords() {
     return (inputtedPassword == inputtedConfirmPassword);
   }
 
-  void validateRegister(BuildContext context) {
-    if (inputtedUser.isNotEmpty &&
+  void _validateRegister(BuildContext context) {
+    if(inputtedUser.isNotEmpty &&
         inputtedPassword.isNotEmpty &&
         inputtedConfirmPassword.isNotEmpty) {
-      if (comparePasswords()) {
+      if(_comparePasswords()) {
         context.read<UserCubit>().post(inputtedUser, inputtedPassword);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('A senha esta diferente da confirmação')));
       }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Campo(s) obrigatório(s) não preenchidos!')));
     }
   }
 

@@ -1,7 +1,7 @@
-import 'package:sport_connection/data/entities/user_entity.dart';
-import 'package:sport_connection/infra/configs/api_basic_auth_config.dart';
+import 'package:sport_connection/domain/models/user_model.dart';
 
-abstract class APIBasicAuthType extends APIBasicAuthConfig {  // TODO: Configurar endpoint
-  //@retrofit.GET('/login')
-  Future<UserEntity> getUser();
+abstract class APIBasicAuthType {
+  Future<void> authenticate(UserModel userModel);
+  bool isAuthenticated();
+  String? getToken();
 }

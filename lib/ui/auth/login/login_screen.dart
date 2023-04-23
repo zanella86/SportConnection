@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sport_connection/domain/models/user_model.dart';
+import 'package:sport_connection/infra/services/api_basic_auth.dart';
 import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/presentation/widgets/rounded_textfield.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
@@ -50,9 +52,13 @@ class LoginScreen extends StatelessWidget {
   }
 
   void authenticateUserPass(BuildContext context) {
-
-    Navigator.pushReplacementNamed(context, HomeScreen.id);
-
+    APIBasicAuth apiBasicAuth = APIBasicAuth();
+    apiBasicAuth.authenticate(UserModel(username: inputtedUser, password: inputtedPassword));
+    if(apiBasicAuth.isAuthenticated()) {
+      Navigator.pushReplacementNamed(context, HomeScreen.id);
+    }else{
+      print("Usuário inválido!");
+    }
   }
 
 }

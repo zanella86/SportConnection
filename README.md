@@ -48,3 +48,6 @@ https://github.com/zanella86/sc-core-api
 - [Flutter - Best Practices - Part 3](https://itnext.io/flutter-best-practices-part-3-747f1bfaec6b)
 - [Flutter - Best Practices - Part 4](https://itnext.io/flutter-best-practices-part-4-709e7bceabf)
 - [Alura - Diferenças: static, const e final](https://www.alura.com.br/artigos/diferenca-entre-static-const-final-no-dart)
+- [Differences Between: Extends, implements and mixin](https://www.topcoder.com/thrive/articles/dart-differences-between-extends-implements-and-mixin)
+- [Dart - Enum](https://stackoverflow.com/questions/38908285/how-do-i-add-methods-or-values-to-enums-in-dart)
+- [Dart - Http](https://pub.dev/packages/http/example)
