@@ -20,7 +20,52 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserCubit, UserCubitState>(
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        leading: InkWell(
+          child: Icon(Icons.arrow_back),
+          onTap: () {
+            _onBackPressed(context);
+          },
+        ),
+      ),
+      body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Center(
+              child:
+              Column(mainAxisSize: MainAxisSize.min, children: [
+                RoundedTextField(
+                  label: 'Insira seu usuário',
+                  textInputType: TextInputType.name,
+                  onTextChange: (text) => inputtedUser = text,
+                ),
+                const SizedBox(height: 16),
+                RoundedTextField(
+                  label: 'Senha',
+                  obscureText: true,
+                  onTextChange: (text) => inputtedPassword = text,
+                ),
+                const SizedBox(height: 16),
+                RoundedTextField(
+                  label: 'Confirmação de senha',
+                  obscureText: true,
+                  onTextChange: (text) =>
+                  inputtedConfirmPassword = text,
+                ),
+                const SizedBox(height: 64),
+                RoundedButton(
+                  text: 'Registrar',
+                  onPressed: () => validateRegister(context),
+                )
+              ]),
+            ),
+          )),
+    );
+
+   /* return BlocConsumer<UserCubit, UserCubitState>(
       listener: (context, state) {
         if (state.isSuccess) {
           Navigator.pushReplacementNamed(context, LoginScreen.id);
@@ -74,7 +119,7 @@ class RegisterScreen extends StatelessWidget {
                     )),
         );
       },
-    );
+    );*/
   }
 
   bool comparePasswords() {
