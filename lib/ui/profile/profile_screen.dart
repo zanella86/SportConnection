@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_connection/domain/entities/profile_entity.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
@@ -7,12 +6,12 @@ import 'package:sport_connection/ui/widgets/bottom_bar.dart';
 class ProfileScreen extends StatelessWidget {
   static const String id = '/profile_screen';
 
-  ProfileScreen({
+  const ProfileScreen({
     super.key,
     required this.profile,
   });
 
-  final ProfileEntity? profile;
+  final ProfileEntity? profile; //FIXME Utilizar o Model aqui
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
                       color: _getTextColor(profile?.score ?? 0),
                       fontSize: 18,
                   ),),
-                  SizedBox(height: 8,),
+                  const SizedBox(height: 8,),
                   Text('EVT ${profile?.eventsScore}', style: TextStyle(
                       color: _getTextColor(profile?.score ?? 0),
                       fontSize: 18,
@@ -61,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                       color: _getTextColor(profile?.score ?? 0),
                       fontSize: 18,
                   ),),
-                  SizedBox(height: 8,),
+                  const SizedBox(height: 8,),
                   Text('FRD ${ profile?.eventsScore}', style: TextStyle(
                       color: _getTextColor(profile?.score ?? 0),
                       fontSize: 18,
@@ -74,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 color: Colors.black.withOpacity(0.5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const FloatingActionButton(
         onPressed: null,
-        child: const Icon(Icons.person),
+        child: Icon(Icons.person),
       ),
       bottomNavigationBar: BottomBar(
         items: [

@@ -46,7 +46,7 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(height: 64),
                     RoundedButton(
                       text: 'Registrar',
-                      onPressed: () => validateRegister(context),
+                      onPressed: () => _validateRegister(context),
                     )
                   ]
               ),
@@ -56,15 +56,19 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 
-  bool comparePasswords() {
+  bool _comparePasswords() {
     return (inputtedPassword == inputtedConfirmPassword);
   }
 
-  void validateRegister(BuildContext context) {
-    if (inputtedUser.isNotEmpty && inputtedPassword.isNotEmpty && inputtedConfirmPassword.isNotEmpty) {
-      if(comparePasswords()) {
+  void _validateRegister(BuildContext context) {
+    if(inputtedUser.isNotEmpty && inputtedPassword.isNotEmpty && inputtedConfirmPassword.isNotEmpty) {
+      if(_comparePasswords()) {
         Navigator.pushReplacementNamed(context, LoginScreen.id);
+      } else {
+        print("As senhas não podem ser diferentes!");
       }
+    } else {
+      print("Campo(s) obrigatório(s) não preenchidos!");
     }
   }
 

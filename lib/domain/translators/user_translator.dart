@@ -5,14 +5,14 @@ class UserTranslator {
 
   static UserEntity toEntity({required UserModel userModel}) {
     return UserEntity(
-      name: userModel.name,
+      name: userModel.username,
       password: userModel.password,
     );
   }
 
   static UserModel toModel({required UserEntity userEntity}) {
     return UserModel(
-      name: userEntity.name,
+      username: userEntity.name,
       password: userEntity.password,
     );
   }

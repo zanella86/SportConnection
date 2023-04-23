@@ -1,5 +1,9 @@
-import 'package:sport_connection/data/repositories/user_repository_type.dart';
+import 'package:sport_connection/data/entities/user_entity.dart';
 
-abstract class UserDatasourceType extends UserRepositoryType {
-
+abstract class UserDatasourceType {
+  Future<UserEntity> getUserEntity(int id);
+  Future<List<UserEntity>> getUserEntityList();
+  void removeUserEntity(UserEntity userEntity);
+  void setUserEntity(UserEntity userEntity);
+  Future<UserEntity> updateUserEntity(UserEntity userEntity);
 }

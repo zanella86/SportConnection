@@ -9,8 +9,8 @@ class UserRepository implements UserRepositoryType {
   final UserDatasourceType userDatasourceType;
 
   @override
-  Future<UserEntity> getUserEntity() async {
-    return await userDatasourceType.getUserEntity();
+  Future<UserEntity> getUserEntity(int id) async {
+    return await userDatasourceType.getUserEntity(id);
   }
 
   @override
