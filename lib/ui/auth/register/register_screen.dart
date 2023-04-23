@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_connection/domain/models/user_dto_model.dart';
+import 'package:sport_connection/presentation/blocs/user/user_cubit.dart';
 import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/presentation/widgets/rounded_textfield.dart';
 import 'package:sport_connection/ui/auth/login/login_screen.dart';
@@ -6,7 +9,9 @@ import 'package:sport_connection/ui/auth/login/login_screen.dart';
 class RegisterScreen extends StatelessWidget {
   static const String id = '/register_screen';
 
-  RegisterScreen({super.key});
+  RegisterScreen({super.key, required this.userDTOModel });
+
+  UserDTOModel userDTOModel;
 
   var inputtedUser = '';
   var inputtedPassword = '';
@@ -14,6 +19,12 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    if(userDTOModel.id != 0) {
+      print('aeeeeeeeee');
+      // quer dizer foi sucesso pra salvar e envia pra outra tela :D
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -63,7 +74,16 @@ class RegisterScreen extends StatelessWidget {
   void validateRegister(BuildContext context) {
     if (inputtedUser.isNotEmpty && inputtedPassword.isNotEmpty && inputtedConfirmPassword.isNotEmpty) {
       if(comparePasswords()) {
-        Navigator.pushReplacementNamed(context, LoginScreen.id);
+
+        context.read<UserCubit>().post(inputtedUser, inputtedPassword);
+
+        print('afer call');
+
+        if(userDTOModel.id != 0) {
+          print('aeeeeeeeee');
+        }
+
+        //Navigator.pushReplacementNamed(context, LoginScreen.id);
       }
     }
   }
