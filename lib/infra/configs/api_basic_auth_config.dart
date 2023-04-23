@@ -6,6 +6,7 @@ abstract class APIBasicAuthConfig {
 
   static const String _loginEndpoint = "users/login";
   static const String _registerEndpoint = "users/register";
+  static const String _eventsEndpoint = "events";
 
   static String getAuthority() {
     return _port.isEmpty ? _server : "$_server:$_port";
@@ -17,6 +18,10 @@ abstract class APIBasicAuthConfig {
 
   static String getRegisterEndpoint() {
     return "/$_apiBase/$_registerEndpoint";
+  }
+
+  static String getEventsEndpoint() {
+    return "/$_apiBase/$_eventsEndpoint";
   }
 
 }
