@@ -1,6 +1,4 @@
-import 'package:sport_connection/domain/translators/json_translator.dart';
-
-class UserDTOModel implements JsonTranslator<UserDTOModel> {
+class UserDTOModel {
   const UserDTOModel({
     required this.id,
     required this.name,
@@ -8,15 +6,5 @@ class UserDTOModel implements JsonTranslator<UserDTOModel> {
 
   final int id;
   final String name;
-
-  @override
-  UserDTOModel? fromJson(Map<String, dynamic> json) {
-    return UserDTOModel(id: json['id'], name: json['name']);
-  }
-
-  @override
-  Map<String, dynamic> toJson(UserDTOModel model) {
-    return {'id': model.id, 'name': model.name};
-  }
 
 }

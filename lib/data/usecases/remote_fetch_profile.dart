@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:sport_connection/domain/entities/profile_entity.dart';
+import 'package:sport_connection/data/entities/profile_entity.dart';
 import 'package:sport_connection/domain/usecases/fetch_profile.dart';
 
 class RemoteFetchProfile extends FetchProfile {

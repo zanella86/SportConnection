@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_connection/domain/entities/event_entity.dart';
+import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/tp_event_enum.dart';
 import 'package:sport_connection/ui/profile/profile_screen.dart';
 import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
@@ -71,12 +71,12 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              TextButton(onPressed: () {}, child: Text('LIKE')),
-                              SizedBox(
+                              TextButton(onPressed: () {}, child: const Text('LIKE')),
+                              const SizedBox(
                                 width: 8,
                               ),
                               TextButton(
-                                  onPressed: () {}, child: Text('DETALHES')),
+                                  onPressed: () {}, child: const Text('DETALHES')),
                             ],
                           )
                         ],
@@ -95,7 +95,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const FloatingActionButton(
         onPressed: null,
-        child: const Icon(Icons.home),
+        child: Icon(Icons.home),
       ),
       bottomNavigationBar: BottomBar(items: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.gpp_good)),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/ui/auth/login/login_screen.dart';
 import 'package:sport_connection/ui/auth/register/register_screen.dart';
-import 'package:sport_connection/ui/home/home_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   static const String id = '/auth_screen';
@@ -33,16 +32,16 @@ class AuthScreen extends StatelessWidget {
                       text: 'Logar',
                       onPressed: () => Navigator.pushReplacementNamed(context, LoginScreen.id),
                     ),
-                    const SizedBox(height: 64),
+                    /*const SizedBox(height: 64),
                     RoundedButton(
                       text: 'Entrar com Google',
-                      onPressed: () => authenticate(context, 'Google'),
-                    ),
-                    const SizedBox(height: 64),
+                      onPressed: () => _authenticate(context, 'Google'),
+                    ),*/
+                    /*const SizedBox(height: 64),
                     RoundedButton(
                       text: 'Entrar com Github',
-                      onPressed: () => authenticate(context, 'Github'),
-                    ),
+                      onPressed: () => _authenticate(context, 'Github'),
+                    ),*/
                   ]
               ),
             ),
@@ -51,10 +50,10 @@ class AuthScreen extends StatelessWidget {
     );
   }
 
-  void authenticate(BuildContext context, String oauth2EntityName) {
+  /*void _authenticate(BuildContext context, String oauth2EntityName) {
     bool authenticated = false;
 
-    switch(oauth2EntityName) {  // TODO Criar enum
+    switch(oauth2EntityName) {  // Substituir por Enum
       case 'Google': {
         authenticated = true;
       }
@@ -74,6 +73,6 @@ class AuthScreen extends StatelessWidget {
     if(authenticated) {
       Navigator.pushReplacementNamed(context, HomeScreen.id);
     }
-  }
+  }*/
 
 }

@@ -1,24 +1,24 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:sport_connection/data/usecases/remote_config_auth.dart';
+import 'package:sport_connection/domain/models/auth_model.dart';
 import 'package:sport_connection/domain/models/user_dto_model.dart';
-import 'package:sport_connection/domain/models/user_model.dart';
-import 'package:sport_connection/infra/configs/api_basic_auth_config.dart';
-import 'package:sport_connection/infra/services/api_basic_auth_type.dart';
+import 'package:sport_connection/domain/usecases/post_auth.dart';
 
-class APIBasicAuth implements APIBasicAuthType {
+class RemotePostAuth implements PostAuth {
 
   bool _isGeneratedToken = false;
   String? _token;
 
   @override
-  Future<void> authenticate(UserModel userModel) async {
-    print('Authority: ${APIBasicAuthConfig.getAuthority()}');
-    print('Endpoint: ${APIBasicAuthConfig.getLoginEndpoint()}');
+  Future<bool> execute(AuthModel authModel) async {
+    print('Authority: ${RemoteConfigAuth.getAuthority()}');
+    print('Endpoint: ${RemoteConfigAuth.getLoginEndpoint()}');
 
     var url = Uri.http(
-        APIBasicAuthConfig.getAuthority(),
-        APIBasicAuthConfig.getLoginEndpoint()
+        RemoteConfigAuth.getAuthority(),
+        RemoteConfigAuth.getLoginEndpoint()
     );
     var response = await http.post(
         url,
@@ -28,8 +28,8 @@ class APIBasicAuth implements APIBasicAuthType {
           //"Accept" : "*/*",
         },
         body: jsonEncode(
-            {userModel},
-            toEncodable: (toEncodable) => userModel.toJson(userModel)
+            {authModel},
+            toEncodable: (toEncodable) => AuthModel.toJson(authModel)
         )
     );
 
@@ -39,14 +39,15 @@ class APIBasicAuth implements APIBasicAuthType {
     if(response.statusCode == 200) {
       _token = jsonDecode(response.body)['token'];
       print('TOKEN: ${getToken()}');
+      return true;
     }
-
+    return false;
   }
 
   @override
   bool isAuthenticated() {
     print('Authenticated? = $_token');
-    if(getToken() != "") {  // FIXME Condição não está sendo atendida. Suspeita de "state" incorreto
+    if(getToken().isNotEmpty) {  // FIXME Condição não está sendo atendida. Suspeita de "state" incorreto
       print('Autenticado!');
       _isGeneratedToken = true;
     }
@@ -55,18 +56,18 @@ class APIBasicAuth implements APIBasicAuthType {
   }
 
   @override
-  String? getToken() {
+  String getToken() {
     return _token ?? "";
   }
 
   @override
-  Future<UserDTOModel> register(UserModel userModel) async {
-    print('Authority: ${APIBasicAuthConfig.getAuthority()}');
-    print('Endpoint: ${APIBasicAuthConfig.getRegisterEndpoint()}');
+  Future<UserDTOModel> register(AuthModel authModel) async {
+    print('Authority: ${RemoteConfigAuth.getAuthority()}');
+    print('Endpoint: ${RemoteConfigAuth.getRegisterEndpoint()}');
 
     var url = Uri.http(
-        APIBasicAuthConfig.getAuthority(),  // localhost:8080
-        APIBasicAuthConfig.getRegisterEndpoint()  // /sc-core/users/register
+        RemoteConfigAuth.getAuthority(),  // localhost:8080
+        RemoteConfigAuth.getRegisterEndpoint()  // /sc-core/users/register
     );
     var response = await http.post(
         url,
@@ -76,8 +77,8 @@ class APIBasicAuth implements APIBasicAuthType {
           //"Accept" : "*/*",
         },
         body: jsonEncode(
-            {userModel},
-            toEncodable: (toEncodable) => userModel.toJson(userModel)
+            {authModel},
+            toEncodable: (toEncodable) => AuthModel.toJson(authModel)
         )
     );
 

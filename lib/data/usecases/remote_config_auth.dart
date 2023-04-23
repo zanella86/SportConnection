@@ -1,4 +1,4 @@
-abstract class APIBasicAuthConfig {
+abstract class RemoteConfigAuth {
 
   static const String _server = "localhost";
   static const String _port = "8080";

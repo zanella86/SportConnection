@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_connection/domain/entities/profile_entity.dart';
+import 'package:sport_connection/data/entities/profile_entity.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
 import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 

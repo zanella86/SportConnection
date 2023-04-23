@@ -1,7 +1,7 @@
+import 'package:sport_connection/data/usecases/remote_post_auth.dart';
 import 'package:sport_connection/domain/models/user_dto_model.dart';
-import 'package:sport_connection/domain/models/user_model.dart';
+import 'package:sport_connection/domain/models/auth_model.dart';
 import 'package:sport_connection/domain/usecases/post_user.dart';
-import 'package:sport_connection/infra/services/api_basic_auth.dart';
 
 class RemotePostUser extends PostUser {
 
@@ -25,8 +25,7 @@ class RemotePostUser extends PostUser {
         return UserDTOModel(id: 0, name: "");
       }*/
 
-    APIBasicAuth apiBasicAuth = APIBasicAuth();
-    return apiBasicAuth.register(UserModel(username: username, password: password));
+    return RemotePostAuth().register(AuthModel(username: username, password: password));
   }
 
 }

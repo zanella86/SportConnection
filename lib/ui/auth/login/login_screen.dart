@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sport_connection/domain/models/user_model.dart';
-import 'package:sport_connection/infra/services/api_basic_auth.dart';
+import 'package:sport_connection/domain/models/auth_model.dart';
+import 'package:sport_connection/data/usecases/remote_post_auth.dart';
 import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/presentation/widgets/rounded_textfield.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
@@ -51,13 +51,15 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void authenticateUserPass(BuildContext context) {
-    APIBasicAuth apiBasicAuth = APIBasicAuth();
-    apiBasicAuth.authenticate(UserModel(username: inputtedUser, password: inputtedPassword));
-    if(apiBasicAuth.isAuthenticated()) {
+  void authenticateUserPass(BuildContext context) async {
+    RemotePostAuth remotePostAuth = RemotePostAuth();
+    //remotePostAuth.execute(AuthModel(username: inputtedUser, password: inputtedPassword));
+    //if(remotePostAuth.isAuthenticated()) {
+    if(await remotePostAuth.execute(AuthModel(username: inputtedUser, password: inputtedPassword))) {
       Navigator.pushReplacementNamed(context, HomeScreen.id);
     }else{
-      print("Usuário inválido!");
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Usuário ou senha inválido!')));
     }
   }
 

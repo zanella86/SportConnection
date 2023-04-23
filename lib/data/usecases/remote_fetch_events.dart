@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:sport_connection/domain/entities/event_entity.dart';
+import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/tp_event_enum.dart';
 import 'package:sport_connection/domain/enums/tp_frequency_enum.dart';
 import 'package:sport_connection/domain/usecases/fetch_events.dart';
