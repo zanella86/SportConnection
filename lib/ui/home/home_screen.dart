@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sport_connection/data/entities/event_entity.dart';
-import 'package:sport_connection/domain/enums/tp_event_enum.dart';
+import 'package:sport_connection/domain/enums/event_type.dart';
 import 'package:sport_connection/ui/profile/profile_screen.dart';
 import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 
@@ -42,12 +42,12 @@ class HomeScreen extends StatelessWidget {
                         children: <Widget>[
                           ListTile(
                             leading: () {
-                              if (event.typeEvent == TpEventEnum.RANKED) {
+                              if (event.typeEvent == EventType.RANKED) {
                                 return const Icon(
                                   Icons.keyboard_double_arrow_up,
                                   size: 50,
                                 );
-                              } else if (event.typeEvent == TpEventEnum.LEARN) {
+                              } else if (event.typeEvent == EventType.LEARN) {
                                 return const Icon(
                                   Icons.note_alt,
                                   size: 50,

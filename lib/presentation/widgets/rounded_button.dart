@@ -6,7 +6,7 @@ class RoundedButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.icon,
-    this.textColor = Colors.lime,
+    this.textColor = Colors.white,
     this.backgroundColor = Colors.indigo,
   });
 
@@ -37,6 +37,7 @@ class RoundedButton extends StatelessWidget {
             textAlign: icon == null ? TextAlign.center : TextAlign.start,
             style: TextStyle(
               color: textColor,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),

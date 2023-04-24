@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/ui/auth/auth_screen.dart';
 
 class SplashScreen extends StatefulWidget {

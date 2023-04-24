@@ -1,5 +1,5 @@
-import 'package:sport_connection/domain/enums/tp_event_enum.dart';
-import 'package:sport_connection/domain/enums/tp_frequency_enum.dart';
+import 'package:sport_connection/domain/enums/event_type.dart';
+import 'package:sport_connection/domain/enums/frequency.dart';
 
 class EventEntity {
   const EventEntity({
@@ -15,10 +15,10 @@ class EventEntity {
 
   final String name;
   final String description;
-  final TpFrequencyEnum frequency;
+  final Frequency frequency;
   final String time;
   final String address;
-  final TpEventEnum typeEvent;
+  final EventType typeEvent;
   final String icon;
   final bool paid;
 }

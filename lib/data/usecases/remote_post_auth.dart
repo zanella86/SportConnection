@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:sport_connection/data/usecases/remote_config_auth.dart';
 import 'package:sport_connection/domain/models/auth_model.dart';
@@ -10,6 +11,8 @@ class RemotePostAuth implements PostAuth {
 
   bool _isGeneratedToken = false;
   String? _token;
+
+  final storage = new FlutterSecureStorage();
 
   @override
   Future<bool> execute(AuthModel authModel) async {
@@ -39,6 +42,7 @@ class RemotePostAuth implements PostAuth {
     if(response.statusCode == 200) {
       _token = jsonDecode(response.body)['token'];
       print('TOKEN: ${getToken()}');
+      await storage.write(key: 'access_token', value: getToken());
       return true;
     }
     return false;
