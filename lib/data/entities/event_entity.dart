@@ -6,7 +6,7 @@ class EventEntity {
     required this.name,
     required this.description,
     required this.frequency,
-    required this.hour,
+    required this.time,
     required this.address,
     required this.typeEvent,
     required this.icon,
@@ -16,7 +16,7 @@ class EventEntity {
   final String name;
   final String description;
   final TpFrequencyEnum frequency;
-  final String hour;
+  final String time;
   final String address;
   final TpEventEnum typeEvent;
   final String icon;
