@@ -24,6 +24,10 @@ class RemoteFetchEvents extends FetchEvents {
       final response = await Client().get(uri, headers: headers);
       final responseJson = jsonDecode(response.body);
 
+      if(responseJson.length == 0){
+        return [];
+      }
+
       return responseJson.map<EventEntity>((map) =>
           EventModel.fromMap(map).toEntity())
           .toList();
