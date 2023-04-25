@@ -86,10 +86,12 @@ class RemotePostAuth implements PostAuth {
         )
     );
 
+    Map<String, dynamic> responseJson = jsonDecode(response.body);
+
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
 
-    return UserDTOModel(id: 0, name: 'lais'); // FIXME Remover mock
+    return UserDTOModel.fromMap(responseJson); // FIXME Remover mock
   }
 
 }

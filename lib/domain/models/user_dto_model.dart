@@ -7,4 +7,9 @@ class UserDTOModel {
   final int id;
   final String name;
 
+  factory UserDTOModel.fromMap(Map<String, dynamic> map) => UserDTOModel(
+    name: map['username'],
+    id: map['id'],
+  );
+
 }
