@@ -26,9 +26,7 @@ class RemotePostAuth implements PostAuth {
     var response = await http.post(
         url,
         headers: <String, String> {
-          //"Access-Control-Allow-Origin" : "*",
           "Content-Type" : "application/json",
-          //"Accept" : "*/*",
         },
         body: jsonEncode(
             {authModel},

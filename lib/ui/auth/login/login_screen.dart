@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sport_connection/domain/models/auth_model.dart';
-import 'package:sport_connection/data/usecases/remote_post_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_connection/presentation/blocs/login/login_cubit.dart';
 import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/presentation/widgets/rounded_textfield.dart';
 import 'package:sport_connection/ui/auth/auth_screen.dart';
-import 'package:sport_connection/ui/home/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id = '/login_screen';
@@ -16,6 +15,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginCubit = context.watch<LoginCubit>();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -71,16 +72,40 @@ class LoginScreen extends StatelessWidget {
           ),
         )
       ),
+      bottomNavigationBar: loginCubit.state.errorMessage.isNotEmpty
+          ? BottomAppBar(
+        child: SizedBox(
+          height: kBottomNavigationBarHeight,
+          child: Center(
+            child: TextButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(loginCubit.state.errorMessage),
+                  ),
+                );
+              },
+              child: Text(
+                loginCubit.state.errorMessage,
+                style: TextStyle(
+                  color: Theme.of(context).errorColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+      )
+          : null,
     );
   }
 
-  void authenticateUserPass(BuildContext context) async {
-    RemotePostAuth remotePostAuth = RemotePostAuth();
-    //remotePostAuth.execute(AuthModel(username: inputtedUser, password: inputtedPassword));
-    //if(remotePostAuth.isAuthenticated()) {
-    if(await remotePostAuth.execute(AuthModel(username: inputtedUser, password: inputtedPassword))) {
-      Navigator.pushReplacementNamed(context, HomeScreen.id);
-    }else{
+  void authenticateUserPass(BuildContext context)  {
+
+    if(inputtedUser.isNotEmpty &&
+        inputtedPassword.isNotEmpty) {
+      context.read<LoginCubit>().login(inputtedUser, inputtedPassword);
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Usuário ou senha inválido!')));
     }

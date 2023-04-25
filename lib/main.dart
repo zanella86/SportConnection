@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sport_connection/presentation/blocs/events/events_cubit.dart';
+import 'package:sport_connection/presentation/blocs/login/login_cubit.dart';
 import 'package:sport_connection/presentation/blocs/profile/profile_cubit.dart';
 import 'package:sport_connection/presentation/blocs/user/user_cubit.dart';
 import 'package:sport_connection/ui/auth/auth_screen.dart';
+import 'package:sport_connection/ui/auth/login/login_container.dart';
 import 'package:sport_connection/ui/auth/register/register_container.dart';
 import 'package:sport_connection/ui/auth/register/register_screen.dart';
 import 'package:sport_connection/ui/home/home_container.dart';
@@ -33,7 +35,9 @@ class MyApp extends StatelessWidget {
           RegisterScreen.id: (context) => UserCubitProvider(
                 child: RegisterContainer(),
               ),
-          LoginScreen.id: (context) => LoginScreen(),
+          LoginScreen.id: (context) => LoginCubitProvider(
+            child: LoginContainer(),
+          ),
           HomeScreen.id: (context) => EventCubitProvider(
                 child: HomeContainer(),
               ),
