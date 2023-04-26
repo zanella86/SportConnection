@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class NothingToShow extends StatelessWidget {
-  const NothingToShow({Key? key, required this.message}) : super(key: key);
+class CustomMessage extends StatelessWidget {
+  const CustomMessage({Key? key, required this.message,  required this.child }) : super(key: key);
 
   final String message;
+  final Widget child;
 
 
   @override
@@ -23,10 +24,7 @@ class NothingToShow extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Icon(
-            Icons.mood_bad,
-            size: 25,
-          ),
+          child,
         ],
       ),
     );

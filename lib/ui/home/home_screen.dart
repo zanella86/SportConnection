@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/event_type.dart';
-import 'package:sport_connection/presentation/widgets/nothing_to_show.dart';
+import 'package:sport_connection/presentation/widgets/custom_message.dart';
 import 'package:sport_connection/ui/profile/profile_screen.dart';
 import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 
@@ -19,7 +19,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child:  eventList.length == 0 ? NothingToShow(message: "Não encontramos eventos para exibir",) : Column(
+        child:  eventList.length == 0 ? CustomMessage(message: "Não encontramos eventos para exibir", child: Icon(
+          Icons.mood_bad,
+          size: 25,
+        )) : Column(
           children: [
             const Text(
               "Eventos populares:",
