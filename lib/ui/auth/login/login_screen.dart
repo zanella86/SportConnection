@@ -32,10 +32,7 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child:  loginCubit.state.isLoading ? CustomMessage(message: "Carregando", child: Icon(
-            Icons.replay_outlined,
-            size: 25,
-          ),) :  Center(
+          child:  loginCubit.state.isLoading ?  Center(child: CircularProgressIndicator(),)  :  Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
