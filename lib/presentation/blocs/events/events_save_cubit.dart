@@ -43,16 +43,24 @@ class EventSaveCubit extends Cubit<EventSaveCubitState> {
     }
   }
 
-  void toggleSwitch() {
-    emit(state.copyWith(formIsPaid: !state.formIsPaid));
+  void toggleSwitchParam(bool value) {
+    print('oii ${value}');
+    if(value != state.formIsPaid) {
+      print('oii emitiu');
+      emit(state.copyWith(formIsPaid: value));
+    }
   }
 
   void changeFrequency(String value) {
-    emit(state.copyWith(formFrequency: value));
+    if(value != state.formFrequency) {
+      emit(state.copyWith(formFrequency: value));
+    }
   }
 
   void changeEventType(String value) {
-    emit(state.copyWith(formEventType: value));
+    if(value != state.formEventType) {
+      emit(state.copyWith(formEventType: value));
+    }
   }
 }
 

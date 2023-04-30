@@ -111,6 +111,7 @@ class HomeScreen extends StatelessWidget {
                                     child: EventScreen(
                                       editEventModel: event,
                                       isEdit: true,
+
                                     ),
                                   ),
                                 ));

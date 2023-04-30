@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/event_type.dart';
 import 'package:sport_connection/domain/enums/frequency.dart';
@@ -12,9 +11,6 @@ import 'package:sport_connection/presentation/widgets/home_icon.dart';
 import 'package:sport_connection/presentation/widgets/profile_icon.dart';
 import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/presentation/widgets/rounded_textfield.dart';
-import 'package:sport_connection/ui/auth/login/login_screen.dart';
-import 'package:sport_connection/ui/home/home_screen.dart';
-import 'package:sport_connection/ui/profile/profile_screen.dart';
 
 class EventScreen extends StatelessWidget {
   static const String id = '/event_screen';
@@ -24,6 +20,7 @@ class EventScreen extends StatelessWidget {
   final EventEntity? editEventModel;
   final bool isEdit;
 
+  bool _setValueEditing = false;
   var _paid = false;
   var _selectedEventType = 'FUN';
   var _selectedFrequency = 'ONE_TIME';
@@ -36,8 +33,8 @@ class EventScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final eventCubit = context.watch<EventSaveCubit>();
 
-    if (isEdit) {
-      _setUpDefaultValue();
+    if (isEdit && !_setValueEditing) {
+      _setValuesForEditing(eventCubit);
     }
 
     final _controllerAddres = TextEditingController(text: _inputtedAddress);
@@ -184,7 +181,8 @@ class EventScreen extends StatelessWidget {
                                 Switch(
                                   value: eventCubit.state.formIsPaid,
                                   onChanged: (bool newValue) {
-                                    eventCubit.toggleSwitch();
+                                    print('oiiii');
+                                    eventCubit.toggleSwitchParam(newValue);
                                   },
                                 ),
                               ],
@@ -275,13 +273,19 @@ class EventScreen extends StatelessWidget {
         .showSnackBar(SnackBar(content: Text(message)));
   }
 
-  void _setUpDefaultValue() {
+  void _setValuesForEditing(eventCubit) {
+
     _paid = editEventModel?.paid ?? false;
+    eventCubit.toggleSwitchParam(_paid);
     _selectedEventType = editEventModel?.typeEvent.name ?? 'FUN';
+    eventCubit.changeEventType(_selectedEventType);
     _selectedFrequency = editEventModel?.frequency.name ?? 'ONE_TIME';
+    eventCubit.changeFrequency(_selectedFrequency);
+
     _inputtedAddress = editEventModel?.address ?? '';
     _inputtedDescription = editEventModel?.description ?? '';
     _inputtedName = editEventModel?.name ?? '';
     _inputtedTime = editEventModel?.time ?? '';
+    _setValueEditing = true;
   }
 }
