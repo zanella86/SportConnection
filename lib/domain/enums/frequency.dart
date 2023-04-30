@@ -16,4 +16,19 @@ class FrequencyUtils {
         return null as Frequency;
     }
   }
+
+  static String toStringFormatted(Frequency frequency) {
+    switch (frequency) {
+      case Frequency.EVERY_DAY:
+        return 'TODO DIA';
+      case Frequency.WEEKLY:
+        return 'SEMANALMENTE';
+      case Frequency.MONTHLY:
+        return 'MENSALMENTE';
+      case Frequency.ONE_TIME:
+        return 'UMA VEZ';
+      default:
+        return '';
+    }
+  }
 }

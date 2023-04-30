@@ -7,6 +7,7 @@ import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 import 'package:sport_connection/presentation/widgets/confirmation_dialog.dart';
 import 'package:sport_connection/presentation/widgets/custom_message.dart';
 import 'package:sport_connection/ui/event/event_screen.dart';
+import 'package:sport_connection/ui/event/view/event_view_screen.dart';
 import 'package:sport_connection/ui/profile/profile_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -107,7 +108,11 @@ class HomeScreen extends StatelessWidget {
                               ),
                               TextButton(
                                   onPressed: () {
-
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) => EventViewScreen(
+                                        entity: event,
+                                      ),
+                                    ));
                                   }, child: const Icon(Icons.remove_red_eye,),),
                             ],
                           )

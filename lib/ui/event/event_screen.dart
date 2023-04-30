@@ -33,7 +33,6 @@ class EventScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final eventCubit = context.watch<EventSaveCubit>();
 
-
     return Scaffold(
         body: InkWell(
           overlayColor: MaterialStateProperty.all(Colors.transparent),
