@@ -146,14 +146,14 @@ class HomeScreen extends StatelessWidget {
         onPressed: null,
         child: Icon(Icons.home),
       ),
-      bottomNavigationBar: BottomBar(items: [
-        const ExitIcon(),
-        const EventIcon(),
-        const SizedBox(
+      bottomNavigationBar: const BottomBar(items: [
+        ExitIcon(),
+        EventIcon(),
+        SizedBox(
           width: 24,
         ),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-        const ProfileIcon(),
+        Icon(Icons.search, color: Colors.grey,),
+        ProfileIcon(),
       ],)
     );
   }

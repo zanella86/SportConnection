@@ -110,15 +110,15 @@ class ProfileScreen extends StatelessWidget {
         onPressed: null,
         child: Icon(Icons.person),
       ),
-      bottomNavigationBar: BottomBar(
+      bottomNavigationBar: const BottomBar(
         items: [
-          const ExitIcon(),
-          const EventIcon(),
-          const SizedBox(
+          ExitIcon(),
+          EventIcon(),
+          SizedBox(
             width: 24,
           ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          const HomeIcon(),
+          Icon(Icons.search, color: Colors.grey,),
+          HomeIcon(),
         ],
       ),
     );

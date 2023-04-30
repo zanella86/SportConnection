@@ -221,15 +221,15 @@ class EventScreen extends StatelessWidget {
           onPressed: null,
           child: Icon(Icons.calendar_today),
         ),
-        bottomNavigationBar: BottomBar(
+        bottomNavigationBar: const BottomBar(
           items: [
-            const ExitIcon(),
-            const HomeIcon(),
-            const SizedBox(
+            ExitIcon(),
+            HomeIcon(),
+            SizedBox(
               width: 24,
             ),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-            const ProfileIcon(),
+            Icon(Icons.search, color: Colors.grey,),
+            ProfileIcon(),
           ],
         ));
   }
