@@ -41,6 +41,7 @@ class RemotePostAuth implements PostAuth {
       _token = jsonDecode(response.body)['token'];
       print('TOKEN: ${getToken()}');
       await storage.write(key: 'access_token', value: getToken());
+      await storage.write(key: 'username', value: authModel.username);
       return true;
     }
     return false;

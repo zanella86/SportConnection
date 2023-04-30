@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/event_type.dart';
 import 'package:sport_connection/domain/enums/frequency.dart';
 import 'package:sport_connection/domain/models/event_dto_model.dart';
 import 'package:sport_connection/presentation/blocs/events/events_save_cubit.dart';
 import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
+import 'package:sport_connection/presentation/widgets/exit_icon.dart';
+import 'package:sport_connection/presentation/widgets/home_icon.dart';
+import 'package:sport_connection/presentation/widgets/profile_icon.dart';
 import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/presentation/widgets/rounded_textfield.dart';
+import 'package:sport_connection/ui/auth/login/login_screen.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
 import 'package:sport_connection/ui/profile/profile_screen.dart';
 
@@ -218,21 +223,13 @@ class EventScreen extends StatelessWidget {
         ),
         bottomNavigationBar: BottomBar(
           items: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.gpp_good)),
-            IconButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, HomeScreen.id);
-                },
-                icon: const Icon(Icons.home)),
+            const ExitIcon(),
+            const HomeIcon(),
             const SizedBox(
               width: 24,
             ),
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-            IconButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, ProfileScreen.id);
-                },
-                icon: const Icon(Icons.person))
+            const ProfileIcon(),
           ],
         ));
   }

@@ -8,7 +8,6 @@ import 'package:sport_connection/ui/home/home_screen.dart';
 class LoginContainer extends BlocConsumer<LoginCubit, LoginCubitState> {
   LoginContainer({super.key})
       : super(listener: (context, state) {
-        print('oi ${state.isAuthenticated}');
           if (state.isAuthenticated) {
             Navigator.pushReplacementNamed(context, HomeScreen.id);
           }

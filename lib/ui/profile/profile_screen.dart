@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sport_connection/data/entities/profile_entity.dart';
+import 'package:sport_connection/presentation/widgets/event_icon.dart';
+import 'package:sport_connection/presentation/widgets/exit_icon.dart';
+import 'package:sport_connection/presentation/widgets/home_icon.dart';
 import 'package:sport_connection/ui/event/event_screen.dart';
 import 'package:sport_connection/ui/home/home_screen.dart';
 import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
@@ -109,19 +112,13 @@ class ProfileScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomBar(
         items: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.gpp_good)),
-          IconButton(onPressed: () {
-            Navigator.pushReplacementNamed(context, EventScreen.id);
-          }, icon: const Icon(Icons.calendar_today)),
+          const ExitIcon(),
+          const EventIcon(),
           const SizedBox(
             width: 24,
           ),
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          IconButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, HomeScreen.id);
-              },
-              icon: const Icon(Icons.home))
+          const HomeIcon(),
         ],
       ),
     );

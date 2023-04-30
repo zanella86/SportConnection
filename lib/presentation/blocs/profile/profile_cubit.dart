@@ -13,9 +13,7 @@ class ProfileCubit extends Cubit<ProfileCubitState> {
   FetchProfile fetchProfile;
 
   Future<void> fetch() async {
-    //TODO - recuperar o username aqui :D
     final profile = await fetchProfile.execute(userName: "laisKagawa");
-    print(profile);
     emit(state.copyWith(profile: profile));
   }
 }

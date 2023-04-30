@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/event_type.dart';
 import 'package:sport_connection/presentation/blocs/events/events_cubit.dart';
@@ -7,6 +8,10 @@ import 'package:sport_connection/presentation/blocs/events/events_save_cubit.dar
 import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 import 'package:sport_connection/presentation/widgets/confirmation_dialog.dart';
 import 'package:sport_connection/presentation/widgets/custom_message.dart';
+import 'package:sport_connection/presentation/widgets/event_icon.dart';
+import 'package:sport_connection/presentation/widgets/exit_icon.dart';
+import 'package:sport_connection/presentation/widgets/profile_icon.dart';
+import 'package:sport_connection/ui/auth/login/login_screen.dart';
 import 'package:sport_connection/ui/event/event_screen.dart';
 import 'package:sport_connection/ui/event/view/event_view_screen.dart';
 import 'package:sport_connection/ui/profile/profile_screen.dart';
@@ -142,19 +147,13 @@ class HomeScreen extends StatelessWidget {
         child: Icon(Icons.home),
       ),
       bottomNavigationBar: BottomBar(items: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.gpp_good)),
-        IconButton(onPressed: () {
-          Navigator.pushReplacementNamed(context, EventScreen.id);
-        }, icon: const Icon(Icons.calendar_today)),
+        const ExitIcon(),
+        const EventIcon(),
         const SizedBox(
           width: 24,
         ),
         IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-        IconButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, ProfileScreen.id);
-            },
-            icon: const Icon(Icons.person))
+        const ProfileIcon(),
       ],)
     );
   }
