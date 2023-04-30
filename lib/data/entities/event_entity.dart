@@ -3,6 +3,7 @@ import 'package:sport_connection/domain/enums/frequency.dart';
 
 class EventEntity {
   const EventEntity({
+    required this.id,
     required this.name,
     required this.description,
     required this.frequency,
@@ -13,6 +14,7 @@ class EventEntity {
     required this.paid,
   });
 
+  final int id;
   final String name;
   final String description;
   final Frequency frequency;

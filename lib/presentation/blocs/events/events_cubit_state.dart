@@ -10,5 +10,5 @@ class EventsCubitState {
   }) =>
       EventsCubitState(
         eventList: eventList ?? this.eventList,
-      );
+  );
 }

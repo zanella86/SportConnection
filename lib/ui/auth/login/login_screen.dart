@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_connection/presentation/blocs/login/login_cubit.dart';
-import 'package:sport_connection/presentation/widgets/custom_message.dart';
 import 'package:sport_connection/presentation/widgets/rounded_button.dart';
 import 'package:sport_connection/presentation/widgets/rounded_textfield.dart';
 import 'package:sport_connection/ui/auth/auth_screen.dart';
