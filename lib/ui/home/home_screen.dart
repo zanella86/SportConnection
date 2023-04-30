@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/event_type.dart';
 import 'package:sport_connection/presentation/blocs/events/events_cubit.dart';
+import 'package:sport_connection/presentation/blocs/events/events_save_cubit.dart';
 import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 import 'package:sport_connection/presentation/widgets/confirmation_dialog.dart';
 import 'package:sport_connection/presentation/widgets/custom_message.dart';
@@ -92,7 +93,6 @@ class HomeScreen extends StatelessWidget {
                                   },
                                 ).then((confirmed) {
                                   if (confirmed != null && confirmed) {
-                                    //print('chamae o delete ${event.id}');
                                     context.read<EventsCubit>().delete(event.id);
                                   }
                                 });
@@ -101,7 +101,14 @@ class HomeScreen extends StatelessWidget {
                                 width: 8,
                               ),
                               TextButton(onPressed: () {
-
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => EventSaveCubitProvider(
+                                    child: EventScreen(
+                                      editEventModel: event,
+                                      isEdit: true,
+                                    ),
+                                  ),
+                                ));
                               }, child: const Icon(Icons.edit,),),
                               const SizedBox(
                                 width: 8,

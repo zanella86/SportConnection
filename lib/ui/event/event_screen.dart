@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/enums/event_type.dart';
 import 'package:sport_connection/domain/enums/frequency.dart';
 import 'package:sport_connection/domain/models/event_dto_model.dart';
@@ -13,25 +14,32 @@ import 'package:sport_connection/ui/profile/profile_screen.dart';
 class EventScreen extends StatelessWidget {
   static const String id = '/event_screen';
 
-  EventScreen({super.key});
+  EventScreen({super.key, this.editEventModel, this.isEdit = false});
 
+  final EventEntity? editEventModel;
+  final bool isEdit;
+
+  var _paid = false;
+  var _selectedEventType = 'FUN';
+  var _selectedFrequency = 'ONE_TIME';
   var _inputtedAddress = '';
   var _inputtedDescription = '';
   var _inputtedName = '';
   var _inputtedTime = '';
 
-  final _controllerAddres = TextEditingController(text: '');
-  final _controllerDescription = TextEditingController(text: '');
-  final _controllerName = TextEditingController(text: '');
-  final _controllerTime = TextEditingController(text: '');
-
-  var _paid = false;
-  var _selectedEventType = 'FUN';
-  var _selectedFrequency = 'ONE_TIME';
-
   @override
   Widget build(BuildContext context) {
     final eventCubit = context.watch<EventSaveCubit>();
+
+    if (isEdit) {
+      _setUpDefaultValue();
+    }
+
+    final _controllerAddres = TextEditingController(text: _inputtedAddress);
+    final _controllerDescription =
+        TextEditingController(text: _inputtedDescription);
+    final _controllerName = TextEditingController(text: _inputtedName);
+    final _controllerTime = TextEditingController(text: _inputtedTime);
 
     return Scaffold(
         body: InkWell(
@@ -47,8 +55,8 @@ class EventScreen extends StatelessWidget {
                   child: Column(
                     children: eventCubit.state.isSaved
                         ? [
-                            const Text(
-                              'Evento registado com sucesso!',
+                            Text(
+                              isEdit? 'Evento editado com sucesso!' : 'Evento registado com sucesso!',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             ),
@@ -56,22 +64,25 @@ class EventScreen extends StatelessWidget {
                               height: 18,
                             ),
                             const Text(
-                              'Para visualizar os eventos cadastros vá até a home :D',
+                              'Para visualizar os eventos cadastros/editados vá até a home :D',
                               style: TextStyle(fontSize: 18),
                             ),
                             const SizedBox(
                               height: 50,
                             ),
                             RoundedButton(
-                              text: 'Cadastrar outro evento',
+                              text: isEdit ? 'Cadastrar evento' : 'Cadastrar outro evento',
                               onPressed: () {
-                                Navigator.pushReplacementNamed(context, EventScreen.id);
+                                Navigator.pushReplacementNamed(
+                                    context, EventScreen.id);
                               },
                             ),
                           ]
                         : [
-                            const Text(
-                              'Adicione um evento:',
+                            Text(
+                              isEdit
+                                  ? 'Editando o evento: ${editEventModel?.name}'
+                                  : 'Adicione um evento:',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             ),
@@ -174,23 +185,22 @@ class EventScreen extends StatelessWidget {
                               ],
                             ),
                             RoundedButton(
-                              text: 'Cadastrar evento',
+                              text: isEdit
+                                  ? 'Alterar evento'
+                                  : 'Cadastrar evento',
                               onPressed: () => {
                                 if (_validateFields(context))
                                   {
-                                    context
-                                        .read<EventSaveCubit>()
-                                        .save(EventDTOModel(
-                                          name: _inputtedName,
-                                          description: _inputtedDescription,
-                                          time: _inputtedTime,
-                                          address: _inputtedAddress,
-                                          eventType:
-                                              eventCubit.state.formEventType,
-                                          frequency:
-                                              eventCubit.state.formFrequency,
-                                          paid: eventCubit.state.formIsPaid,
-                                        ))
+                                    if (isEdit)
+                                      {
+                                        context.read<EventSaveCubit>().update(_getDto(eventCubit))
+                                      }
+                                    else
+                                      {
+                                        context
+                                            .read<EventSaveCubit>()
+                                            .save(_getDto(eventCubit))
+                                      }
                                   }
                               },
                             )
@@ -224,33 +234,22 @@ class EventScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.person))
           ],
-        )
-        /*  bottomNavigationBar: eventCubit.state.errorMessage.isNotEmpty
-          ? BottomAppBar(
-        child: SizedBox(
-          height: kBottomNavigationBarHeight,
-          child: Center(
-            child: TextButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(eventCubit.state.errorMessage),
-                  ),
-                );
-              },
-              child: Text(
-                eventCubit.state.errorMessage,
-                style: TextStyle(
-                  color: Theme.of(context).errorColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ),
-      )
-          : null,*/
-        );
+        ));
+  }
+
+  EventDTOModel _getDto(eventCubit) {
+    return EventDTOModel(
+      id: editEventModel?.id ?? 0,
+      name: _inputtedName,
+      description: _inputtedDescription,
+      time: _inputtedTime,
+      address: _inputtedAddress,
+      eventType: eventCubit
+          .state.formEventType,
+      frequency: eventCubit
+          .state.formFrequency,
+      paid: eventCubit.state.formIsPaid,
+    );
   }
 
   bool _validateFields(context) {
@@ -277,5 +276,15 @@ class EventScreen extends StatelessWidget {
   void _showSnack(context, String message) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void _setUpDefaultValue() {
+    _paid = editEventModel?.paid ?? false;
+    _selectedEventType = editEventModel?.typeEvent.name ?? 'FUN';
+    _selectedFrequency = editEventModel?.frequency.name ?? 'ONE_TIME';
+    _inputtedAddress = editEventModel?.address ?? '';
+    _inputtedDescription = editEventModel?.description ?? '';
+    _inputtedName = editEventModel?.name ?? '';
+    _inputtedTime = editEventModel?.time ?? '';
   }
 }

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/data/usecases/remote_requests_events.dart';
 import 'package:sport_connection/domain/models/event_dto_model.dart';
 import 'package:sport_connection/domain/usecases/requests_events.dart';
@@ -24,7 +25,21 @@ class EventSaveCubit extends Cubit<EventSaveCubitState> {
     if(response != null) {
       emit(state.copyWith(isSaved: true, isLoading: false));
     } else {
-      emit(state.copyWith(isLoading: false, errorMessage: 'Não foi possível realizar o login'));
+      emit(state.copyWith(isLoading: false, errorMessage: 'Não foi possível salvar o evento'));
+    }
+  }
+
+  Future<void> update(EventDTOModel dtoModel) async {
+
+    emit(state.copyWith(isLoading: true));
+    final response = await requestEvents.update(dtoModel);
+
+    print('retorno do request ${response}');
+
+    if(response != null) {
+      emit(state.copyWith(isSaved: true, isLoading: false));
+    } else {
+      emit(state.copyWith(isLoading: false, errorMessage: 'Não foi possível salvar o evento'));
     }
   }
 
@@ -42,10 +57,10 @@ class EventSaveCubit extends Cubit<EventSaveCubitState> {
 }
 
 class EventSaveCubitProvider extends BlocProvider<EventSaveCubit> {
-  EventSaveCubitProvider({super.key, Widget? child}) :
+  EventSaveCubitProvider({super.key, Widget? child, EventEntity? entity, bool isEditing = false }) :
         super(
         create: (context) => EventSaveCubit(
-          EventSaveCubitState(isLoading: false, isSaved: false, errorMessage: ''),
+          EventSaveCubitState(isLoading: false, isSaved: false, errorMessage: '', entity: entity, isEditing: isEditing ),
           requestEvents: RemoteRequestsEvents(),
         ),
         child: child,

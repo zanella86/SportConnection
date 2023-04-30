@@ -1,12 +1,15 @@
+import 'package:sport_connection/data/entities/event_entity.dart';
+
 class EventSaveCubitState {
   EventSaveCubitState(
-      {
-        this.isLoading = false,
+      {this.isLoading = false,
       this.isSaved = false,
       this.errorMessage = '',
       this.formIsPaid = false,
       this.formEventType = 'FUN',
-      this.formFrequency = 'ONE_TIME'});
+      this.formFrequency = 'ONE_TIME',
+      this.entity,
+      this.isEditing = false});
 
   final bool isLoading;
   final bool isSaved;
@@ -14,6 +17,8 @@ class EventSaveCubitState {
   final bool formIsPaid;
   final String formFrequency;
   final String formEventType;
+  final EventEntity? entity;
+  final bool isEditing;
 
   EventSaveCubitState copyWith({
     bool? isLoading,
@@ -22,6 +27,8 @@ class EventSaveCubitState {
     bool? formIsPaid,
     String? formFrequency,
     String? formEventType,
+    EventEntity? entity,
+    bool? isEditing,
   }) =>
       EventSaveCubitState(
         isLoading: isLoading ?? this.isLoading,
@@ -30,5 +37,7 @@ class EventSaveCubitState {
         formEventType: formEventType ?? this.formEventType,
         formFrequency: formFrequency ?? this.formFrequency,
         formIsPaid: formIsPaid ?? this.formIsPaid,
+        entity: entity ?? this.entity,
+        isEditing: isEditing ?? this.isEditing,
       );
 }

@@ -84,8 +84,24 @@ class RemoteRequestsEvents extends RequestEvents {
   }
 
   @override
-  Future<EventDTOModel?> update(EventDTOModel dtoModel) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<EventDTOModel?> update(EventDTOModel dtoModel) async {
+    try {
+      final uri = Uri.parse('http://localhost:8080/sc-core/events/${dtoModel.id}');
+      final token = await storage.read(key: 'access_token');
+
+      final headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      };
+
+      final response = await Client().patch(uri, headers: headers, body: jsonEncode( EventDTOModel.toJson(dtoModel)));
+      final responseJson = jsonDecode(response.body);
+
+      return EventDTOModel.fromJson(responseJson);
+
+    } catch (e) {
+      print('Update Event >>> ${e}');
+      return null;
+    }
   }
 }
