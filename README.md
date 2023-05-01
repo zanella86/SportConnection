@@ -7,35 +7,50 @@ SportConnection mobile app powered by Flutter.
 # VISÃO GERAL
 
 Este "protótipo" foi gerado com prints do projeto. Em caso de problemas com a configuração do setup (rodar o app ou subir o backend), adicionamos no Figma uma simulação do funcionamento do app.
+
 ![Protótipo de alta fidelidade](/docs/prototype_links.png)
 
 Link para navegar na simulação:
 - [Protótipo navegável](https://www.figma.com/proto/PT4kfOtG2p9JALG48LFUGi/SportConnection?type=design&node-id=2-15&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A15)
 
+Dicas:
+
+Na navegação do protótipo, basta clicar em qualquer lugar da tela que o figma executará alguma destas ações:
+- Se existe uma página sequencial -> irá redirecionar para a próxima página
+- Se não existe uma página sequencial -> irá exibir os botões disponíveis para cliques
+
 
 O que é possível fazer?
 - Registrar um usuário
+
   ![Registrar Usuário](/docs/register.png)
 
 - Realizar login
+
   ![Realizar login](/docs/login.png)
 
 - Cadastrar eventos
+
   ![Cadastrar eventos](/docs/add_event.png)
 
 - Editar eventos
+
   ![Cadastrar eventos](/docs/edit_event.png)
 
 - Listar eventos
+
   ![Listar eventos](/docs/list_events.png)
 
 - Ver detalhes do evento
+
   ![Ver detalhes do evento](/docs/details_event.png)
 
 - Deletar evento
+
   ![Deletar evento](/docs/delete_event.png)
 
 - Visualizar o profile do usuário logado
+
   ![Visualizar o profile do usuário logado](/docs/profile.png)
 
 
