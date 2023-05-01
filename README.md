@@ -69,6 +69,13 @@ O que é possível fazer?
 https://github.com/zanella86/sc-core-api
 
 ---
+# PREMISSAS
+
+É necessário rodar o projeto `sc-core-api` mencionado acima (contém informações de como fazer no `README.md` do repositório).
+
+O `app` esta configurado para, ao fazer as requisições, buscar em localhost:8080 (certifique-se que foi nesta porta que o backend `sc-core-api` esta rodando)
+
+---
 
 # FERRAMENTAS / TECNOLOGIAS
 
