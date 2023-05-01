@@ -18,7 +18,7 @@ enum RankLevelType {
   bronze(
       20,
       color: Color.fromRGBO(235, 186, 143, 1),
-      shield: "assets/images/cards_bg_brown.png",
+      shield: "assets/images/cards_bg_bronze.png",
       status: "Bronze Level"
   );
 
@@ -45,4 +45,5 @@ class RankLevelUtils {
     }
     return RankLevelType.gold;
   }
+
 }

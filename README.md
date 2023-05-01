@@ -79,7 +79,6 @@ O `app` esta configurado para, ao fazer as requisições, buscar em localhost:80
 
 # FERRAMENTAS / TECNOLOGIAS
 
-<!-- - [Draw.io](https://app.diagrams.net/) -->
 - [Figma](https://www.figma.com/)
 - Git / Github
 - Android Studio Electric Eel
