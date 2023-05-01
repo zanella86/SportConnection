@@ -6,6 +6,7 @@ import 'package:sport_connection/data/usecases/remote_config_auth.dart';
 import 'package:sport_connection/domain/models/auth_model.dart';
 import 'package:sport_connection/domain/models/user_dto_model.dart';
 import 'package:sport_connection/domain/usecases/post_auth.dart';
+import 'package:sport_connection/infra/config_init.dart';
 
 class RemotePostAuth implements PostAuth {
 
@@ -16,11 +17,8 @@ class RemotePostAuth implements PostAuth {
 
   @override
   Future<bool> execute(AuthModel authModel) async {
-    print('Authority: ${RemoteConfigAuth.getAuthority()}');
-    print('Endpoint: ${RemoteConfigAuth.getLoginEndpoint()}');
-
     var url = Uri.http(
-        RemoteConfigAuth.getAuthority(),
+        ConfigInit.getAuthority(),
         RemoteConfigAuth.getLoginEndpoint()
     );
     var response = await http.post(
@@ -34,12 +32,8 @@ class RemotePostAuth implements PostAuth {
         )
     );
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
     if(response.statusCode == 200) {
       _token = jsonDecode(response.body)['token'];
-      print('TOKEN: ${getToken()}');
       await storage.write(key: 'access_token', value: getToken());
       await storage.write(key: 'username', value: authModel.username);
       return true;
@@ -49,12 +43,9 @@ class RemotePostAuth implements PostAuth {
 
   @override
   bool isAuthenticated() {
-    print('Authenticated? = $_token');
-    if(getToken().isNotEmpty) {  // FIXME Condição não está sendo atendida. Suspeita de "state" incorreto
-      print('Autenticado!');
+    if(getToken().isNotEmpty) {
       _isGeneratedToken = true;
     }
-    print('Retornando: $_isGeneratedToken');
     return _isGeneratedToken;
   }
 
@@ -65,11 +56,9 @@ class RemotePostAuth implements PostAuth {
 
   @override
   Future<UserDTOModel> register(AuthModel authModel) async {
-    print('Authority: ${RemoteConfigAuth.getAuthority()}');
-    print('Endpoint: ${RemoteConfigAuth.getRegisterEndpoint()}');
 
     var url = Uri.http(
-        RemoteConfigAuth.getAuthority(),  // localhost:8080
+        ConfigInit.getAuthority(),  // localhost:8080
         RemoteConfigAuth.getRegisterEndpoint()  // /sc-core/users/register
     );
     var response = await http.post(
@@ -86,11 +75,7 @@ class RemotePostAuth implements PostAuth {
     );
 
     Map<String, dynamic> responseJson = jsonDecode(response.body);
-
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
-    return UserDTOModel.fromMap(responseJson); // FIXME Remover mock
+    return UserDTOModel.fromMap(responseJson);
   }
 
 }

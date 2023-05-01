@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sport_connection/infra/config_init.dart';
 import 'package:sport_connection/ui/auth/auth_screen.dart';
+import 'package:sport_connection/ui/home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String id = '/splash_screen';
 
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({
+    Key? key
+  }) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -14,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  final storage = FlutterSecureStorage();
 
   @override
   void initState() {
@@ -29,9 +35,15 @@ class _SplashScreenState extends State<SplashScreen>
       curve: Curves.easeIn,
     );
 
-    _controller.addStatusListener((status) {
+    _controller.addStatusListener((status) async {
+      var username = await storage.read(key: "username");
       if (status == AnimationStatus.completed) {
-        Navigator.pushReplacementNamed(context, AuthScreen.id);
+        print('Authority: ' + ConfigInit.getAuthority());
+        if (username != null && username.toString().isNotEmpty) {
+          Navigator.pushReplacementNamed(context, HomeScreen.id);
+        }else {
+          Navigator.pushReplacementNamed(context, AuthScreen.id);
+        }
       }
     });
     _controller.forward();
@@ -54,7 +66,10 @@ class _SplashScreenState extends State<SplashScreen>
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Center(
-              child: Column(mainAxisSize: MainAxisSize.min, children: const [
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
                 Text(
                   'SPORT CONNECTION',
                   style: TextStyle(
@@ -69,6 +84,16 @@ class _SplashScreenState extends State<SplashScreen>
                   Icons.place,
                   color: Color.fromRGBO(246, 82, 160, 1),
                   size: 60,
+                ),
+                SizedBox(
+                  height: 56,
+                ),
+                Text(
+                  'Verificando usuário logado...',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold),
                 ),
               ]),
             ),

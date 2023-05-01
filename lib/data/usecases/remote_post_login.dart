@@ -9,8 +9,8 @@ class RemotePostLogin implements PostLogin {
     try {
       return RemotePostAuth().execute(AuthModel(username: username, password: password));
     } catch(e) {
-      print('Remote POST Login ${e}');
       return false as Future<bool>;
     }
   }
+
 }

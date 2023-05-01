@@ -181,7 +181,6 @@ class EventScreen extends StatelessWidget {
                                 Switch(
                                   value: eventCubit.state.formIsPaid,
                                   onChanged: (bool newValue) {
-                                    print('oiiii');
                                     eventCubit.toggleSwitchParam(newValue);
                                   },
                                 ),

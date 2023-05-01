@@ -20,8 +20,6 @@ class EventSaveCubit extends Cubit<EventSaveCubitState> {
     emit(state.copyWith(isLoading: true));
     final response = await requestEvents.save(dtoModel);
 
-    print('retorno do request ${response}');
-
     if(response != null) {
       emit(state.copyWith(isSaved: true, isLoading: false));
     } else {
@@ -34,8 +32,6 @@ class EventSaveCubit extends Cubit<EventSaveCubitState> {
     emit(state.copyWith(isLoading: true));
     final response = await requestEvents.update(dtoModel);
 
-    print('retorno do request ${response}');
-
     if(response != null) {
       emit(state.copyWith(isSaved: true, isLoading: false));
     } else {
@@ -44,9 +40,7 @@ class EventSaveCubit extends Cubit<EventSaveCubitState> {
   }
 
   void toggleSwitchParam(bool value) {
-    print('oii ${value}');
     if(value != state.formIsPaid) {
-      print('oii emitiu');
       emit(state.copyWith(formIsPaid: value));
     }
   }

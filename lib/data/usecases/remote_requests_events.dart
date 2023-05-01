@@ -15,9 +15,8 @@ class RemoteRequestsEvents extends RequestEvents {
   Future<List<EventEntity>> list() async {
     try {
       final uri = Uri.parse('http://localhost:8080/sc-core/events');
-
       final token = await storage.read(key: 'access_token');
-      print('token -> ${token}');
+
       final headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${token}'
@@ -28,13 +27,11 @@ class RemoteRequestsEvents extends RequestEvents {
       if(responseJson.length == 0){
         return [];
       }
-      print(responseJson);
 
       return responseJson.map<EventEntity>((map) =>
           EventModel.fromMap(map).toEntity())
           .toList();
     } catch (e) {
-      print('Fetch Event >>> ${e}');
       return [];
     }
   }
@@ -56,7 +53,6 @@ class RemoteRequestsEvents extends RequestEvents {
       return EventDTOModel.fromJson(responseJson);
 
     } catch (e) {
-      print('Save Event >>> ${e}');
       return null;
     }
   }
@@ -73,12 +69,8 @@ class RemoteRequestsEvents extends RequestEvents {
       };
 
       final response = await Client().delete(uri, headers: headers);
-      //final responseJson = jsonDecode(response.body);
-
       return true;
-
     } catch (e) {
-      print('Delete Event >>> ${e}');
       return false;
     }
   }
@@ -100,7 +92,6 @@ class RemoteRequestsEvents extends RequestEvents {
       return EventDTOModel.fromJson(responseJson);
 
     } catch (e) {
-      print('Update Event >>> ${e}');
       return null;
     }
   }

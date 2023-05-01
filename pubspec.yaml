@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^4.0.3
   http: ^0.13.5
   flutter_secure_storage: ^8.0.0
+  settings_yaml: ^5.0.0
 
 dev_dependencies:
   flutter_test:

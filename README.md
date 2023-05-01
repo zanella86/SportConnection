@@ -51,3 +51,4 @@ https://github.com/zanella86/sc-core-api
 - [Differences Between: Extends, implements and mixin](https://www.topcoder.com/thrive/articles/dart-differences-between-extends-implements-and-mixin)
 - [Dart - Enum](https://stackoverflow.com/questions/38908285/how-do-i-add-methods-or-values-to-enums-in-dart)
 - [Dart - Http](https://pub.dev/packages/http/example)
+- [Settings Yaml](https://pub.dev/packages/settings_yaml/example)
