@@ -1,45 +1,32 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:sport_connection/data/entities/profile_entity.dart';
+import 'package:sport_connection/domain/models/profile_model.dart';
 import 'package:sport_connection/domain/usecases/fetch_profile.dart';
+import 'package:sport_connection/infra/config_init.dart';
+import 'package:sport_connection/infra/storage_util.dart';
 
 class RemoteFetchProfile extends FetchProfile {
   @override
-  Future<ProfileEntity> execute({required userName}) async {
-    // TODO: implement execute
+  Future<ProfileModel?> execute({required userName}) async {
     try {
-      final uri = Uri.parse('https://demo7206081.mockable.io/movies');
-      final response = await Client().get(uri);
+      final username = await StorageUtil.read(key: 'username');
+      final token = await StorageUtil.read(key: 'access_token');
+
+      final uri = Uri.parse('${ConfigInit.getAuthority()}/sc-core/profiles/${username}');
+
+      final headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      };
+
+      final response = await Client().get(uri, headers: headers);
       final responseJson = jsonDecode(response.body);
-
-      /*return responseJson['results']
-          .map<MovieEntity>((map) => MovieModel.fromMap(map).toEntity())
-          .toList();*/
-
-      List<String> achievements = <String>[];
-      achievements.add("2x seguidas! Continue assim :D ");
-      achievements.add("PARABÉNS! Você participou do seu primeiro evento ");
-
-      return ProfileEntity(
-        name: "Lais Kagawa",
-        userName: "laisKagawa",
-        eventsScore: 99,
-        score: 10,
-        address: "R. XPTIO 157",
-        achievements: achievements,
-        profileImage: 'https://w0.peakpx.com/wallpaper/609/744/HD-wallpaper-kakashi-naruto-kakashi-dms-kakashi-naruto-naruto-kakashi-hatake-kakashi-kakashi-uchiha-kakashi-hatake-naruto-shippuden-kakashi-sharingan.jpg'
-      );
+      print('afterresponse >>> ${responseJson}');
+      return ProfileModel.fromMap(responseJson);
     } catch (e) {
-      return ProfileEntity(
-          name: "Lais Kagawa",
-          userName: "laisKagawa",
-          eventsScore: 10,
-          score: 15,
-          address: "R. XPTIO 157",
-          achievements: [],
-          profileImage: 'https://w0.peakpx.com/wallpaper/609/744/HD-wallpaper-kakashi-naruto-kakashi-dms-kakashi-naruto-naruto-kakashi-hatake-kakashi-kakashi-uchiha-kakashi-hatake-naruto-shippuden-kakashi-sharingan.jpg'
-      );
+      print('Remote Profile >> ${e}');
+      return null;
     }
   }
 }
