@@ -22,11 +22,11 @@ class RemoteFetchProfile extends FetchProfile {
 
       final response = await Client().get(uri, headers: headers);
       final responseJson = jsonDecode(response.body);
-      print('afterresponse >>> ${responseJson}');
       return ProfileModel.fromMap(responseJson);
     } catch (e) {
       print('Remote Profile >> ${e}');
       return null;
     }
   }
+
 }

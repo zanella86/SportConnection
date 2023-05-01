@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:sport_connection/data/usecases/remote_config_auth.dart';
 import 'package:sport_connection/domain/models/auth_model.dart';
 import 'package:sport_connection/domain/models/user_dto_model.dart';
 import 'package:sport_connection/domain/usecases/post_auth.dart';
@@ -13,8 +11,6 @@ class RemotePostAuth implements PostAuth {
 
   bool _isGeneratedToken = false;
   String? _token;
-
-
 
   @override
   Future<bool> execute(AuthModel authModel) async {
