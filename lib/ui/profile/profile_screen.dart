@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sport_connection/data/entities/profile_entity.dart';
-import 'package:sport_connection/domain/enums/hank_level_type.dart';
+import 'package:sport_connection/domain/enums/rank_level_type.dart';
+import 'package:sport_connection/domain/models/profile_model.dart';
+import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 import 'package:sport_connection/presentation/widgets/event_icon.dart';
 import 'package:sport_connection/presentation/widgets/exit_icon.dart';
 import 'package:sport_connection/presentation/widgets/home_icon.dart';
-import 'package:sport_connection/presentation/widgets/bottom_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String id = '/profile_screen';
@@ -14,11 +14,11 @@ class ProfileScreen extends StatelessWidget {
     required this.profile,
   });
 
-  final ProfileEntity? profile;
+  final ProfileModel? profile;
 
   @override
   Widget build(BuildContext context) {
-    HankLevelType hankLevelType = HankLevelUtils.getHank(profile?.score ?? 0);
+    RankLevelType hankLevelType = RankLevelUtils.getHank(profile?.score ?? 0);
     //var shield = Image.asset(hankLevelType.shield,width: 644,height: 900,);
     return Scaffold(
       body: SafeArea(
@@ -45,12 +45,12 @@ class ProfileScreen extends StatelessWidget {
                 left: MediaQuery.of(context).size.height * 0.1,
                 child: Column(
                   children: [
-                    Text('SCR ${profile?.score}', style: TextStyle(
+                    Text('SCR ${profile?.score.toString().padLeft(2, '0')}', style: TextStyle(
                         color: hankLevelType.color,
                         fontSize: 18,
                     ),),
                     const SizedBox(height: 8,),
-                    Text('EVT ${profile?.eventsScore}', style: TextStyle(
+                    Text('EVT ${0.toString().padLeft(2, '0')}', style: TextStyle(
                         color: hankLevelType.color,
                         fontSize: 18,
                     ),),
@@ -62,12 +62,12 @@ class ProfileScreen extends StatelessWidget {
                 left: MediaQuery.of(context).size.height * 0.28,
                 child: Column(
                   children: [
-                    Text('ACM ${profile?.achievements.length.toString().padLeft(2, '0')}', style: TextStyle(
+                    Text('ACM ${profile?.achievements.toString().padLeft(2, '0')}', style: TextStyle(
                         color: hankLevelType.color,
                         fontSize: 18,
                     ),),
                     const SizedBox(height: 8,),
-                    Text('FRD ${ profile?.eventsScore}', style: TextStyle(
+                    Text('FRD ${ profile?.eventParticipated.toString().padLeft(2, '0')}', style: TextStyle(
                         color: hankLevelType.color,
                         fontSize: 18,
                     ),),
@@ -94,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '${profile?.achievements != null ? profile?.achievements[0] : ''}',
+                        '${profile?.name.toUpperCase() ?? ''}, bora participar de eventos e melhorar seus scores!',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,

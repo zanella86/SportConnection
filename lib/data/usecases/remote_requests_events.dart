@@ -1,21 +1,23 @@
 import 'dart:convert';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:sport_connection/data/entities/event_entity.dart';
 import 'package:sport_connection/domain/models/event_dto_model.dart';
 import 'package:sport_connection/domain/models/event_model.dart';
 import 'package:sport_connection/domain/usecases/requests_events.dart';
+import 'package:sport_connection/infra/config_init.dart';
+import 'package:sport_connection/infra/storage_util.dart';
 
 class RemoteRequestsEvents extends RequestEvents {
 
-  final storage = new FlutterSecureStorage();
 
   @override
   Future<List<EventEntity>> list() async {
     try {
-      final uri = Uri.parse('http://localhost:8080/sc-core/events');
-      final token = await storage.read(key: 'access_token');
+      final username = await StorageUtil.read(key: 'username');
+      final token =  await StorageUtil.read(key: 'access_token');
+
+      final uri = Uri.parse('${ConfigInit.getAuthority()}/sc-core/profiles/${username}/events');
 
       final headers = {
         'Content-Type': 'application/json',
@@ -39,8 +41,10 @@ class RemoteRequestsEvents extends RequestEvents {
   @override
   Future<EventDTOModel?> save(EventDTOModel dtoModel) async {
     try {
-      final uri = Uri.parse('http://localhost:8080/sc-core/events');
-      final token = await storage.read(key: 'access_token');
+      final username = await StorageUtil.read(key: 'username');
+      final token = await StorageUtil.read(key: 'access_token');
+
+      final uri = Uri.parse('${ConfigInit.getAuthority()}/sc-core/profiles/${username}/events');
 
       final headers = {
         'Content-Type': 'application/json',
@@ -60,8 +64,10 @@ class RemoteRequestsEvents extends RequestEvents {
   @override
   Future<bool> delete(int id) async {
     try {
-      final uri = Uri.parse('http://localhost:8080/sc-core/events/${id}');
-      final token = await storage.read(key: 'access_token');
+      final username = await StorageUtil.read(key: 'username');
+      final token = await StorageUtil.read(key: 'access_token');
+
+      final uri = Uri.parse('${ConfigInit.getAuthority()}/sc-core/profiles/${username}/events/${id}');
 
       final headers = {
         'Content-Type': 'application/json',
@@ -78,8 +84,10 @@ class RemoteRequestsEvents extends RequestEvents {
   @override
   Future<EventDTOModel?> update(EventDTOModel dtoModel) async {
     try {
-      final uri = Uri.parse('http://localhost:8080/sc-core/events/${dtoModel.id}');
-      final token = await storage.read(key: 'access_token');
+      final username = await StorageUtil.read(key: 'username');
+      final token = await StorageUtil.read(key: 'access_token');
+
+      final uri = Uri.parse('${ConfigInit.getAuthority()}/sc-core/profiles/${username}/events/${dtoModel.id}');
 
       final headers = {
         'Content-Type': 'application/json',

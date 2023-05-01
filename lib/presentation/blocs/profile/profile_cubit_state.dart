@@ -1,12 +1,12 @@
-import 'package:sport_connection/data/entities/profile_entity.dart';
+import 'package:sport_connection/domain/models/profile_model.dart';
 
 class ProfileCubitState {
   ProfileCubitState({this.profile});
 
-  final ProfileEntity? profile;
+  final ProfileModel? profile;
 
   ProfileCubitState copyWith({
-    ProfileEntity? profile,
+    ProfileModel? profile,
   }) =>
       ProfileCubitState(
         profile: profile ?? this.profile,

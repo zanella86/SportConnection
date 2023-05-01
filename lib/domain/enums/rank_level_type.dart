@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-enum HankLevelType {
-
+enum RankLevelType {
   gold(
       90,
       color: Color.fromRGBO(255, 226, 140, 1),
       shield: "assets/images/cards_bg_golden.png",
-      status: "Golden Level"
+      status: "Gold Level"
   ),
 
   silver(
@@ -20,10 +19,10 @@ enum HankLevelType {
       20,
       color: Color.fromRGBO(235, 186, 143, 1),
       shield: "assets/images/cards_bg_brown.png",
-      status: "Brown Level"
+      status: "Bronze Level"
   );
 
-   const HankLevelType(
+   const RankLevelType(
       this.score, {
       required this.color,
       required this.shield,
@@ -37,14 +36,13 @@ enum HankLevelType {
 
 }
 
-class HankLevelUtils {
-  static HankLevelType getHank(int score) {
-    if(score < HankLevelType.bronze.score) {
-      return HankLevelType.bronze;
-    } else if(score < HankLevelType.silver.score) {
-      return HankLevelType.silver;
+class RankLevelUtils {
+  static RankLevelType getHank(int score) {
+    if(score < RankLevelType.bronze.score) {
+      return RankLevelType.bronze;
+    } else if(score < RankLevelType.silver.score) {
+      return RankLevelType.silver;
     }
-    return HankLevelType.gold;
+    return RankLevelType.gold;
   }
-
 }

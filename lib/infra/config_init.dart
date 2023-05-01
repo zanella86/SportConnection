@@ -10,7 +10,7 @@ class ConfigInit {
     /*final config = ConfigInit._load();
     String host = config.asString('server.host');
     String port = config.asInt('server.port').toString();*/
-    String host = "localhost";
+    String host = "http://localhost";
     String port = "8080";
     return port.isEmpty ? host : "$host:$port";
   }

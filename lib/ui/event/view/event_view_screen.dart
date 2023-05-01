@@ -17,6 +17,7 @@ class EventViewScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Detalhes'),
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
         leading: InkWell(
