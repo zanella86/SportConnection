@@ -20,6 +20,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        title: Text('Login'),
         backgroundColor: Theme.of(context).colorScheme.primary,
         leading: InkWell(
           child: Icon(Icons.arrow_back),
